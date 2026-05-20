@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelUA — FAQ</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
+</head>
+<body>
+
+<header>
+    <div class="top-panel">
+        <div class="logo-block">
+            <h1>TravelUA</h1>
+            <p>Подорожуй Україною</p>
+        </div>
+        <nav class="navbar">
+            <a href="index.html">Головна</a>
+            <a href="about.html">Про нас</a>
+            <a href="gallery.html">Галерея</a>
+            <a href="contacts.html">Контакти</a>
+            <a href="faq.html" class="active">FAQ</a>
+        </nav>
+        <button class="theme-toggle" id="themeToggle" title="Перемкнути тему">
+            <span class="theme-icon">🌙</span>
+        </button>
+    </div>
+</header>
+
+<main>
+
+    <div class="two-col" style="align-items: start;">
+
+        <section class="block" style="padding-top: 48px;">
+            <p class="section-label">FAQ</p>
+            <h2>Часті питання</h2>
+            <p style="margin-bottom: 40px;">Відповіді на найпопулярніші запитання наших мандрівників.</p>
+
+            <div class="faq-item">
+                <button class="faq-q">Як користуватися сайтом? <span class="arrow">+</span></button>
+                <div class="faq-a">Оберіть сторінку через меню навігації. У розділі «Галерея» — фото локацій з описами. У «Контактах» — форма зворотного зв'язку.</div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q">Які міста представлені на сайті? <span class="arrow">+</span></button>
+                <div class="faq-a">Наразі представлені Львів, Київ, Одеса, Івано-Франківськ та інші туристичні міста України.</div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q">Як знайти маршрут для поїздки? <span class="arrow">+</span></button>
+                <div class="faq-a">Перегляньте розділ «Галерея» та оберіть напрямок, який вас зацікавив.</div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q">Як додати своє місце або маршрут? <span class="arrow">+</span></button>
+                <div class="faq-a">Напишіть нам на email або через форму на сторінці «Контакти».</div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q">Яка краща пора року для подорожей? <span class="arrow">+</span></button>
+                <div class="faq-a">Карпати чудові взимку та влітку, Одеса — влітку, а Львів та Київ — комфортні для подорожей увесь рік.</div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q">Це безкоштовний сервіс? <span class="arrow">+</span></button>
+                <div class="faq-a">Так, сайт повністю безкоштовний для всіх користувачів.</div>
+            </div>
+        </section>
+
+        <section class="block" style="padding-top: 48px;">
+            <p class="section-label">Напрямки</p>
+            <h2>Представлені міста</h2>
+            <p style="margin-bottom: 28px;">Ми показуємо найпопулярніші туристичні місця України.</p>
+
+            <ul class="faq-list" style="margin-bottom: 40px;">
+                <li>Львів — архітектура та кава</li>
+                <li>Київ — столиця та Лавра</li>
+                <li>Одеса — море та катакомби</li>
+                <li>Івано-Франківськ — ворота Карпат</li>
+                <li>Чернівці — «маленький Відень»</li>
+                <li>Ужгород — замок та сакури</li>
+                <li>Харків — студентська столиця</li>
+                <li>Кам'янець-Подільський — фортеця</li>
+            </ul>
+
+            <div style="border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; background: var(--surface); transition: background 0.3s ease, border-color 0.3s ease;">
+                <p style="font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--text);">Не знайшов відповіді?</p>
+                <p style="font-size: 14px; color: var(--text-muted);">Напишіть нам через сторінку <a href="contacts.html" style="color: var(--blue); text-decoration: none;">«Контакти»</a>.</p>
+            </div>
+        </section>
+
+    </div>
+
+</main>
+
+<footer>
+    <span class="footer-left">© 2026 TravelUA</span>
+    <div class="footer-right">
+        <a href="index.html">Головна</a>
+        <a href="contacts.html">Контакти</a>
+        <a href="about.html">Про нас</a>
+    </div>
+</footer>
+
+<script>
+    document.querySelectorAll('.faq-q').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.parentElement;
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        });
+    });
+</script>
+
+</body>
+</html>

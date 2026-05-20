@@ -1,0 +1,1054 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+/* ══════════════════════════════════════
+   CSS-змінні — світла тема (за замовч.)
+   ══════════════════════════════════════ */
+:root {
+    --bg: #ffffff;
+    --surface: #f9f9f7;
+    --border: #e8e8e4;
+    --text: #111111;
+    --text-muted: #888888;
+    --accent: #1a1a1a;
+    --accent-hover: #333333;
+    --blue: #2563eb;
+    --tg: #229ED9;
+    --tg-hover: #1a86ba;
+    --radius: 12px;
+    --shadow: 0 4px 20px rgba(0,0,0,0.06);
+    --shadow-hover: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+/* ══════════════════════════════════════
+   Темна тема
+   ══════════════════════════════════════ */
+[data-theme="dark"] {
+    --bg: #0f0f0f;
+    --surface: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #f0f0f0;
+    --text-muted: #666666;
+    --accent: #f0f0f0;
+    --accent-hover: #cccccc;
+    --shadow: 0 4px 20px rgba(0,0,0,0.3);
+    --shadow-hover: 0 8px 32px rgba(0,0,0,0.5);
+}
+
+/* ══════════════════════════════════════
+   База
+   ══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    /* плавне перемикання теми */
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ══════════════════════════════════════
+   @keyframes анімації
+   ══════════════════════════════════════ */
+
+/* Поява знизу при завантаженні */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Поява зліва */
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-24px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Пульсація кнопки CTA */
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(26,26,26,0.25); }
+    50%       { box-shadow: 0 0 0 10px rgba(26,26,26,0); }
+}
+
+/* Обертання іконки теми */
+@keyframes spinOnce {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+/* ══════════════════════════════════════
+   Header
+   ══════════════════════════════════════ */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] header {
+    background: rgba(15,15,15,0.88);
+}
+
+.top-panel {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+/* ─── Логотип ─── */
+.logo-block {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    animation: fadeInLeft 0.5s ease both;
+}
+
+.logo-block h1 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    transition: color 0.3s ease;
+}
+
+.logo-block p {
+    font-size: 13px;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+/* ─── Навігація ─── */
+.navbar {
+    display: flex;
+    gap: 2px;
+    animation: fadeInLeft 0.5s ease 0.1s both;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 6px;
+    /* Урок 5: transition на hover */
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    position: relative;
+}
+
+.navbar a:hover {
+    background: var(--surface);
+    color: var(--text);
+    transform: translateY(-1px);
+}
+
+.navbar a.active {
+    background: var(--accent);
+    color: var(--bg);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ─── Dark mode toggle ─── */
+.theme-toggle {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    flex-shrink: 0;
+    color: var(--text);
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    line-height: 1;
+}
+
+.theme-toggle:hover {
+    background: var(--border);
+    transform: scale(1.1);
+}
+
+/* SVG-іконки всередині кнопки */
+.theme-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.theme-icon svg {
+    display: block;
+    /* Вхід: пружний spring-ефект */
+    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.22s ease;
+}
+
+/* Вихід: швидке ease-in зникнення */
+.theme-icon.icon-out svg {
+    transform: scale(0) rotate(60deg);
+    opacity: 0;
+    transition: transform 0.16s ease-in, opacity 0.14s ease-in;
+}
+
+/* ══════════════════════════════════════
+   Hero
+   ══════════════════════════════════════ */
+.hero {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 104px 32px 80px;
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.3s ease;
+    position: relative;
+}
+
+/* Тонка декоративна лінія зверху hero */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 32px;
+    width: 40px;
+    height: 3px;
+    background: var(--blue);
+    border-radius: 0 0 3px 3px;
+    opacity: 0.6;
+}
+
+.hero h2 {
+    font-size: clamp(36px, 5.5vw, 64px);
+    font-weight: 600;
+    letter-spacing: -2px;
+    line-height: 1.08;
+    margin-bottom: 24px;
+    color: var(--text);
+    /* Урок 5: анімація появи */
+    animation: fadeInUp 0.6s ease both;
+    transition: color 0.3s ease;
+}
+
+.hero p {
+    font-size: 17px;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin-bottom: 36px;
+    animation: fadeInUp 0.6s ease 0.1s both;
+    transition: color 0.3s ease;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+/* ══════════════════════════════════════
+   Кнопки
+   ══════════════════════════════════════ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: var(--bg);
+    text-decoration: none;
+    padding: 11px 22px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Урок 5: @keyframes pulse на головній кнопці */
+.btn-pulse {
+    animation: pulse 2.5s infinite;
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.btn-outline:hover {
+    background: var(--surface);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.btn-tg {
+    background: var(--tg);
+    color: #fff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-tg:hover {
+    background: var(--tg-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34,158,217,0.3);
+}
+
+.btn-tg svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+/* ══════════════════════════════════════
+   Main
+   ══════════════════════════════════════ */
+main {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 72px 32px;
+}
+
+/* ══════════════════════════════════════
+   Section label
+   ══════════════════════════════════════ */
+.section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+}
+
+.section-label::before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 2px;
+    background: var(--blue);
+    border-radius: 2px;
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+/* ══════════════════════════════════════
+   Stats
+   ══════════════════════════════════════ */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 72px;
+    transition: border-color 0.3s ease, background 0.3s ease;
+    /* ВИПРАВЛЕНО: видалено animation: fadeInUp — конфліктувало зі scroll-reveal на .stat дітях.
+       Тепер увесь блок .stats з'являється разом із .stat елементами через reveal. */
+}
+
+.stat {
+    background: var(--bg);
+    padding: 28px 24px;
+    text-align: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.stat:hover {
+    background: var(--surface);
+    transform: translateY(-2px);
+}
+
+.stat-num {
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    color: var(--blue);
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    transition: color 0.3s ease;
+}
+
+/* ══════════════════════════════════════
+   Cards grid
+   ══════════════════════════════════════ */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    /* Урок 5: transition */
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+    background: var(--bg);
+}
+
+.card:hover {
+    border-color: var(--text-muted);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.card:hover img {
+    transform: scale(1.04);
+}
+
+.card-body { padding: 18px 20px; }
+
+.card-body h3 {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    margin-bottom: 5px;
+    color: var(--text);
+    transition: color 0.3s ease;
+}
+
+.card-body p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    transition: color 0.3s ease;
+}
+
+.card-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: rgba(37,99,235,0.07);
+    border: 1px solid rgba(37,99,235,0.18);
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-bottom: 8px;
+    transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+/* ══════════════════════════════════════
+   Content blocks
+   ══════════════════════════════════════ */
+.block {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.3s ease;
+}
+
+.block:last-child { border-bottom: none; }
+
+.block h2 {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+    margin-bottom: 14px;
+    color: var(--text);
+    transition: color 0.3s ease;
+}
+
+.block > p {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 520px;
+    transition: color 0.3s ease;
+}
+
+.block img {
+    width: 100%;
+    max-width: 560px;
+    border-radius: var(--radius);
+    margin-top: 32px;
+    border: 1px solid var(--border);
+    display: block;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.block img:hover {
+    transform: scale(1.01);
+    box-shadow: var(--shadow-hover);
+}
+
+/* ══════════════════════════════════════
+   Values
+   ══════════════════════════════════════ */
+.values { list-style: none; margin-top: 28px; }
+
+.values li {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.3s ease, background 0.2s ease, padding-left 0.2s ease;
+    border-radius: 0;
+}
+
+.values li:first-child { border-top: 1px solid var(--border); }
+
+.values li:hover {
+    padding-left: 8px;
+}
+
+.values-icon { font-size: 20px; line-height: 1.5; flex-shrink: 0; }
+
+.values li strong {
+    display: block;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+    transition: color 0.3s ease;
+}
+
+.values li span {
+    font-size: 14px;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+/* ══════════════════════════════════════
+   Team
+   ══════════════════════════════════════ */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 28px;
+}
+
+.team-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    text-align: center;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+    background: var(--bg);
+}
+
+.team-card:hover {
+    border-color: var(--text-muted);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.team-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+.team-card:hover .team-avatar {
+    transform: scale(1.1);
+}
+
+.team-card h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text);
+    transition: color 0.3s ease;
+}
+
+.team-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+/* ══════════════════════════════════════
+   Two-col
+   ══════════════════════════════════════ */
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+}
+
+/* ══════════════════════════════════════
+   Form
+   ══════════════════════════════════════ */
+.form-group { margin-bottom: 20px; }
+
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    transition: color 0.3s ease;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    background: var(--bg);
+    outline: none;
+    transition: border-color 0.2s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.2s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: var(--text-muted);
+    box-shadow: 0 0 0 3px rgba(128,128,128,0.1);
+}
+
+textarea { min-height: 130px; resize: vertical; }
+
+button[type="submit"] {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* ══════════════════════════════════════
+   Gallery grid
+   ══════════════════════════════════════ */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 28px;
+}
+
+.gallery-grid .card img { height: 280px; }
+
+/* ══════════════════════════════════════
+   FAQ
+   ══════════════════════════════════════ */
+.faq-item {
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.3s ease, padding-left 0.2s ease;
+    padding-left: 0;
+}
+
+.faq-item:first-child { border-top: 1px solid var(--border); }
+
+.faq-item.open {
+    padding-left: 14px;
+    border-left: 2px solid var(--blue);
+}
+
+.faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    text-align: left;
+    padding: 20px 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.faq-q:hover {
+    padding-left: 6px;
+    color: var(--text);
+}
+
+.faq-q span.arrow {
+    font-size: 18px;
+    color: var(--text-muted);
+    transition: transform 0.25s ease, color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.faq-item.open .faq-q { color: var(--blue); }
+.faq-item.open .faq-q span.arrow { transform: rotate(45deg); color: var(--blue); }
+
+/* ВИПРАВЛЕНО: замінено display:none/block + animation на max-height transition.
+   Причини:
+   1. display:none → display:block не анімується (закриття було миттєвим — без анімації).
+   2. animation без fill-mode:both міг викликати flash opacity.
+   3. Тепер є плавне відкриття І закриття через CSS-transition. */
+.faq-a {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    font-size: 15px;
+    color: var(--text-muted);
+    padding-bottom: 0;
+    line-height: 1.7;
+    transition: max-height 0.35s ease, opacity 0.3s ease, padding-bottom 0.35s ease, color 0.3s ease;
+}
+
+.faq-item.open .faq-a {
+    max-height: 400px; /* достатньо для будь-якого тексту */
+    opacity: 1;
+    padding-bottom: 20px;
+}
+
+/* FAQ список міст */
+.faq-list { list-style: none; }
+
+.faq-list li {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+    transition: color 0.3s ease, border-color 0.3s ease, padding-left 0.2s ease;
+}
+
+.faq-list li:first-child { border-top: 1px solid var(--border); }
+
+.faq-list li:hover { padding-left: 6px; }
+
+.faq-list li::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--blue);
+    flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════
+   Contacts (вбудований стиль залишаємо
+   в contacts.html, тут загальне)
+   ══════════════════════════════════════ */
+.contact-list { list-style: none; margin-bottom: 32px; }
+
+.contact-list li {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+    align-items: center;
+    transition: border-color 0.3s ease;
+}
+
+.contact-list li:first-child { border-top: 1px solid var(--border); }
+
+.contact-list .label {
+    color: var(--text-muted);
+    font-size: 13px;
+    min-width: 76px;
+    transition: color 0.3s ease;
+}
+
+/* ══════════════════════════════════════
+   Footer
+   ══════════════════════════════════════ */
+footer {
+    border-top: 1px solid var(--border);
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.footer-left {
+    font-size: 13px;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+.footer-right { display: flex; gap: 20px; }
+
+.footer-right a {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.footer-right a:hover {
+    color: var(--text);
+    transform: translateY(-1px);
+}
+
+/* ══════════════════════════════════════
+   Scroll-reveal (клас додається JS)
+   ══════════════════════════════════════ */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ══════════════════════════════════════
+   Hamburger button (приховано на десктопі)
+   ══════════════════════════════════════ */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 8px;
+    flex-shrink: 0;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.hamburger span {
+    width: 18px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    display: block;
+    transition: transform 0.3s ease, opacity 0.3s ease, background 0.3s ease;
+}
+
+.hamburger:hover { background: var(--border); }
+
+.hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ══════════════════════════════════════
+   Responsive — планшет (≤ 900px)
+   ══════════════════════════════════════ */
+@media (max-width: 900px) {
+    .top-panel { padding: 0 24px; }
+    .navbar a { padding: 6px 11px; font-size: 13px; }
+}
+
+/* ══════════════════════════════════════
+   Responsive — мобільний (≤ 768px)
+   ══════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    /* Header */
+    .top-panel {
+        padding: 0 16px;
+        height: 56px;
+        position: relative;
+    }
+    .logo-block p { display: none; }
+
+    /* Бургер-меню */
+    .hamburger { display: flex; }
+
+    /* Навігація — випадаючий дропдаун */
+    .navbar {
+        display: none;
+        position: absolute;
+        top: 56px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(255,255,255,0.97);
+        border-bottom: 1px solid var(--border);
+        padding: 8px 16px 16px;
+        gap: 2px;
+        z-index: 99;
+        backdrop-filter: blur(16px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        animation: fadeInUp 0.2s ease both;
+    }
+
+    [data-theme="dark"] .navbar {
+        background: rgba(15,15,15,0.97);
+    }
+
+    .navbar.nav-open { display: flex; }
+
+    .navbar a {
+        padding: 12px 16px;
+        font-size: 15px;
+        border-radius: 8px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar a:hover { transform: none; }
+    .navbar a.active { padding-left: 16px; }
+
+    /* Hero */
+    .hero {
+        padding: 56px 16px 48px;
+    }
+
+    .hero h2 {
+        letter-spacing: -1px;
+        margin-bottom: 16px;
+    }
+
+    .hero p { font-size: 15px; margin-bottom: 28px; }
+
+    .hero-btns {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero-btns .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 24px;
+        font-size: 15px;
+    }
+
+    /* Main */
+    main { padding: 36px 16px; }
+
+    /* Stats */
+    .stats {
+        grid-template-columns: repeat(3, 1fr);
+        margin-bottom: 48px;
+    }
+
+    .stat { padding: 20px 12px; }
+    .stat-num { font-size: 26px; }
+    .stat-label { font-size: 11px; }
+
+    /* Block */
+    .block { padding: 36px 0; }
+    .block h2 { font-size: 24px; letter-spacing: -0.5px; }
+    .block > p { font-size: 15px; }
+    .block img { max-width: 100%; }
+
+    /* Two-col */
+    .two-col { grid-template-columns: 1fr; gap: 0; }
+    .two-col .block { border-bottom: 1px solid var(--border); }
+
+    /* Cards */
+    .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* Gallery */
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-grid .card img { height: 200px; }
+
+    /* Team */
+    .team-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .team-card { padding: 16px 12px; }
+
+    /* FAQ */
+    .faq-q { font-size: 15px; padding: 16px 0; }
+
+    /* Footer */
+    footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 24px 16px;
+        gap: 12px;
+    }
+}
+
+/* ══════════════════════════════════════
+   Responsive — малий телефон (≤ 480px)
+   ══════════════════════════════════════ */
+@media (max-width: 480px) {
+    .logo-block h1 { font-size: 18px; }
+
+    .hero { padding: 40px 16px 32px; }
+    .hero h2 { letter-spacing: -0.5px; }
+
+    .stats { grid-template-columns: 1fr; gap: 1px; margin-bottom: 36px; }
+    .stat { padding: 18px 20px; }
+    .stat-num { font-size: 30px; }
+    .stat-label { font-size: 12px; }
+
+    .grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: 1fr; }
+
+    .block { padding: 28px 0; }
+    .block h2 { font-size: 22px; }
+
+    .faq-q { font-size: 14px; }
+
+    .btn { font-size: 14px; padding: 13px 20px; }
+}
+
+/* ══════════════════════════════════════
+   Responsive — дуже малий (≤ 360px)
+   ══════════════════════════════════════ */
+@media (max-width: 360px) {
+    .hero h2 { font-size: clamp(28px, 8vw, 36px); letter-spacing: 0; }
+    main { padding: 28px 12px; }
+    .hero { padding: 32px 12px; }
+}
